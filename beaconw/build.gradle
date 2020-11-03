@@ -11,9 +11,6 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -22,19 +19,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 }
 
 dependencies {
-
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-
     api 'com.tencent.qcloud:beacon-android-release:4.1.9'
 }
+
+// 发布到 bintray
+project.extensions.add('artifactId', 'beacon-android-wrapper')
+project.extensions.add('packageType', 'aar')
+project.extensions.add('artifactDesc', 'tencent beacon wrapper')
+
+// 添加发布脚本
+apply from: '../../publish.gradle'
